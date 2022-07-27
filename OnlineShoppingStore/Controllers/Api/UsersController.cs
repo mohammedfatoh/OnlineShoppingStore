@@ -25,7 +25,7 @@ namespace OnlineShoppingStore.Controllers.Api
             if (user == null)
                 return NotFound();
 
-            user.IsDelete = false;
+            user.IsActive = false;
 
             var result = await _userManager.UpdateAsync(user);
 
