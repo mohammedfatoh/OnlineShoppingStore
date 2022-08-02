@@ -32,9 +32,18 @@ namespace OnlineShoppingStore.Data
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens", "Security");
         }
 
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<CartStatus> CartStatuses { get; set; }
+
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-17LHCQ4;Initial Catalog=OnlineShoppingStore_DB;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Data Source=DESKTOP-17LHCQ4;Initial Catalog=OnlineShoppingStore_DB;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
 
     }

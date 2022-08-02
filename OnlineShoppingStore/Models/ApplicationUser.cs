@@ -20,5 +20,10 @@ namespace OnlineShoppingStore.Models
 
         [Required]
         public DateTime ModifiedOn { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
+
+        public virtual ICollection<Cart> Carts { get; set; }
+
     }
 }
