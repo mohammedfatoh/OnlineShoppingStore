@@ -34,7 +34,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("CartProduct");
+                    b.ToTable("CartProduct", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -265,7 +265,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CartStatusId")
+                    b.Property<int?>("CartStatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -277,7 +277,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.CartStatus", b =>
@@ -289,12 +289,11 @@ namespace OnlineShoppingStore.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("cartStatus")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CartStatuses");
+                    b.ToTable("CartStatuses", (string)null);
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.Category", b =>
@@ -318,7 +317,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.Order", b =>
@@ -371,7 +370,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.Product", b =>
@@ -423,7 +422,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("CartProduct", b =>
@@ -496,9 +495,7 @@ namespace OnlineShoppingStore.Data.Migrations
                 {
                     b.HasOne("OnlineShoppingStore.Models.CartStatus", "CartStatus")
                         .WithMany()
-                        .HasForeignKey("CartStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CartStatusId");
 
                     b.HasOne("OnlineShoppingStore.Models.ApplicationUser", "User")
                         .WithMany("Carts")

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShoppingStore.Models
 {
@@ -21,8 +22,12 @@ namespace OnlineShoppingStore.Models
         [Required(ErrorMessage = "Description of product Required")]
         public string Description { get; set; }
 
+        //[Required(ErrorMessage = "image of product Required")]
+        public byte[]? Image { get; set; }
+
         [Required(ErrorMessage = "image of product Required")]
-        public byte[] Image { get; set; }
+        [NotMapped]
+        public IFormFile? File { get; set; }
 
         public bool IsFeatured { get; set; }
 
@@ -34,9 +39,11 @@ namespace OnlineShoppingStore.Models
         [Range(typeof(decimal), "1", "50000", ErrorMessage = "Invalid price")]
         public decimal Price { get; set; }
 
-        public virtual Category Category { get; set; }
+        public int CategoryId { get; set; }
 
-        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual Category? Category { get; set; }
+
+        public virtual ICollection<Cart>? Carts { get; set; }
 
     }
 }

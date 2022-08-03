@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
 
-        public string cartStatus { get; set; }
+        [NameExist]
+        public string? cartStatus { get; set; }
     }
 }

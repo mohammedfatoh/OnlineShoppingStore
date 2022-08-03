@@ -16,3 +16,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.profile-picture {
+    height: 295px;
+    width: 295px;
+    object-fit: cover;
+}
+
+.avater {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+}

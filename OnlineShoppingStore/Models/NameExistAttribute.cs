@@ -18,7 +18,7 @@ namespace OnlineShoppingStore.Models
                     Category categoryFromDb = context.Categories.FirstOrDefault(s => s.Name == value.ToString());
                     if (categoryFromDb != null && categoryFromDb.Id != id)
                     {
-                        return new ValidationResult("Student Name Already Exist");
+                        return new ValidationResult("Category Name Already Exist");
                     }
 
                     return ValidationResult.Success;
@@ -30,7 +30,7 @@ namespace OnlineShoppingStore.Models
                     Product productFromDb = context.Products.FirstOrDefault(s => s.Name == value.ToString());
                     if (productFromDb != null && productFromDb.Id != id)
                     {
-                        return new ValidationResult("Student Name Already Exist");
+                        return new ValidationResult("Product Name Already Exist");
                     }
 
                     return ValidationResult.Success;
