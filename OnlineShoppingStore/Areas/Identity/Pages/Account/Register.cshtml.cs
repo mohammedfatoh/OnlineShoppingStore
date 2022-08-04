@@ -134,7 +134,8 @@ namespace OnlineShoppingStore.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     IsActive = true,
                     IsDelete = false,
-                    CreatedOn = DateTime.Now
+                    CreatedOn = DateTime.Now,
+                    ProfilePicture = null
                 };
 
                 await _userStore.SetUserNameAsync(user, new MailAddress(Input.Email).User, CancellationToken.None);

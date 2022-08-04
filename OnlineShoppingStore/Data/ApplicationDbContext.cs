@@ -43,8 +43,8 @@ namespace OnlineShoppingStore.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-17LHCQ4;Initial Catalog=OnlineShoppingStore_DB;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Data Source=DESKTOP-17LHCQ4;Initial Catalog=OnlineShoppingStore_DB;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
-
+       
     }
 }

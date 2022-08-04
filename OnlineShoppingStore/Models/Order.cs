@@ -28,7 +28,11 @@ namespace OnlineShoppingStore.Models
         [Required]
         public string PaymentType { get; set; }
 
+        public string UserId { get; set; }
+
         public virtual ApplicationUser User { get; set; }
+
+        public int CartId { get; set; }
 
         public virtual Cart Cart { get; set; }
 

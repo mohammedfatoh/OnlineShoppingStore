@@ -7,7 +7,7 @@ using OnlineShoppingStore.ViewModels;
 
 namespace OnlineShoppingStore.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   // [Authorize(Roles = "Admin")]/
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

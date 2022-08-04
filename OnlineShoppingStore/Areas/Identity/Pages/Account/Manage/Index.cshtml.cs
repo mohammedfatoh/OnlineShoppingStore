@@ -66,6 +66,11 @@ namespace OnlineShoppingStore.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Profile Picture")]
+            public byte[] ProfilePicture { get; set; }
+
+
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -79,6 +84,7 @@ namespace OnlineShoppingStore.Areas.Identity.Pages.Account.Manage
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                ProfilePicture = user.ProfilePicture,
                 PhoneNumber = phoneNumber
             };
         }
@@ -131,6 +137,19 @@ namespace OnlineShoppingStore.Areas.Identity.Pages.Account.Manage
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
+                }
+            }
+
+            if (Request.Form.Files.Count > 0)
+            {
+                var file = Request.Form.Files.FirstOrDefault();
+
+                //2 important things we must doing checking extention and size of file
+
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    user.ProfilePicture = dataStream.ToArray();
                 }
             }
 
