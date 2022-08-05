@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\CustomerStyle\.idea\modules.xml" />
+    <Content Include="wwwroot\CustomerStyle\.idea\workspace.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.7" />
@@ -1503,6 +1508,7 @@
     <None Include="wwwroot\AdminStyle\vendor\jquery\jquery.slim.js" />
     <None Include="wwwroot\AdminStyle\vendor\jquery\jquery.slim.min.js" />
     <None Include="wwwroot\AdminStyle\vendor\jquery\jquery.slim.min.map" />
+    <None Include="wwwroot\CustomerStyle\.idea\front.iml" />
   </ItemGroup>
 
 </Project>
