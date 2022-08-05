@@ -76,6 +76,17 @@ namespace OnlineShoppingStore.Controllers
 
         }
 
+        public IActionResult CategoryDetails(int id)
+        {
+            return View(categoryService.GetDetails(id));
+        }
+
+        public IActionResult DeleteCategory(int id)
+        {
+            categoryService.Delete(id);
+            return RedirectToAction("Categories");
+        }
+
         //products
         public IActionResult Products()
         {
@@ -108,6 +119,12 @@ namespace OnlineShoppingStore.Controllers
                         product.Image = dataStream.ToArray();
                     }
                 }
+            }
+
+            if (product.Image == null)
+            {
+                ModelState.AddModelError("", "image of product Required");
+                return View(product);
             }
 
             if (!ModelState.IsValid)
@@ -151,6 +168,17 @@ namespace OnlineShoppingStore.Controllers
                     }
                 }
             }
+            else
+            {
+                product.Image = productService.GetDetails(id).Image;
+            }
+
+            if(product.Image == null)
+            {
+                ModelState.AddModelError("", "image of product Required");
+                return View(product);
+            }
+
             if (!ModelState.IsValid)
                 return View(product);
             try
@@ -165,6 +193,17 @@ namespace OnlineShoppingStore.Controllers
             }
             return View();
 
+        }
+
+        public IActionResult ProductDetails(int id)
+        {
+            return View(productService.GetDetails(id));
+        }
+
+        public IActionResult DeleteProduct(int id)
+        {
+            productService.Delete(id);
+            return RedirectToAction("Products");
         }
     }
 }

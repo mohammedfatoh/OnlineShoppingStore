@@ -1,0 +1,35 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "CategoryDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+    SelectList products = new SelectList(Model.Products,"Id","Name");
+}
+
+<h1>CategoryDetails</h1>
+
+<div class="container">
+
+    <form asp-action="AddProduct" asp-controller="Admin" asp-antiforgery="true" method="post" style="width:50%" enctype="multipart/form-data">
+        <div asp-validation-summary="None" class="text-danger"></div>
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" disabled/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="IsActive"></label>
+            <input asp-for="IsActive" class="form-control" disabled/>
+            <span asp-validation-for="IsActive" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Products"></label>
+            @*<input asp-for="Products.Name"  class="form-control" disabled/>*@
+            <select asp-for="Products" asp-items="products" class="form-control">
+            </select>
+            <span asp-validation-for="Products" class="text-danger"></span>
+        </div>
+        
+    </form>
+
+</div>

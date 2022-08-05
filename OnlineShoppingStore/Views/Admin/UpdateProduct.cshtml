@@ -9,8 +9,8 @@
 
 <div class="container">
 
-    <form asp-action="UpdateProduct" asp-controller="Admin" asp-antiforgery="true" method="post" style="width:50%" enctype="multipart/form-data">
-        <div asp-validation-summary="None" class="text-danger"></div>
+    <form id="profile-form" asp-action="UpdateProduct" asp-controller="Admin" asp-antiforgery="true" method="post" style="width:50%" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <input hidden asp-for="Id" class="form-control"/>
         <div>
             <label asp-for="Name"></label>
@@ -36,18 +36,22 @@
        <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="Image" class="w-100">Product Image</label>
-                
-                
+                @if (Model.Image != null)
+                {
                     <img id="imageProduct" alt="profile" class="profile-picture" src="data:image/*;base64,@(Convert.ToBase64String(Model.Image))" />
-                
+                }
+                else
+                {
+                    <img id="imageProduct" alt="profile" class="profile-picture" src="~/images/avatar-male.jpg" />
+                }
                 <div class="custom-file mt-2">
                     <input type="file"
                            accept="image/*"
-                           asp-for="File"
+                           asp-for="Image"
                            class="custom-file-input"
                            onchange="document.getElementById('imageProduct').src = window.URL.createObjectURL(this.files[0])" />
-                    <label class="custom-file-label" asp-for="File">choose picture...</label>
-                    <span asp-validation-for="File" class="text-danger"></span>
+                    <label class="custom-file-label" asp-for="Image">choose picture...</label>
+                    <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -64,3 +68,4 @@
         <input type="submit" class="btn btn-success" value="Save" />
     </form>
 
+</div>

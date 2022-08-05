@@ -25,10 +25,6 @@ namespace OnlineShoppingStore.Models
         //[Required(ErrorMessage = "image of product Required")]
         public byte[]? Image { get; set; }
 
-        [Required(ErrorMessage = "image of product Required")]
-        [NotMapped]
-        public IFormFile? File { get; set; }
-
         public bool IsFeatured { get; set; }
 
         [Required]

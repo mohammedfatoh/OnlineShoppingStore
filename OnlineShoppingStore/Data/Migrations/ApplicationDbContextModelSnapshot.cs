@@ -34,7 +34,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("CartProduct");
+                    b.ToTable("CartProduct", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -281,7 +281,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.CartStatus", b =>
@@ -297,7 +297,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CartStatuses");
+                    b.ToTable("CartStatuses", (string)null);
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.Category", b =>
@@ -321,7 +321,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.Order", b =>
@@ -375,7 +375,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.Product", b =>
@@ -426,7 +426,7 @@ namespace OnlineShoppingStore.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("CartProduct", b =>

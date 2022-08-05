@@ -24,6 +24,7 @@ namespace OnlineShoppingStore.Services
         public int Delete(int id)
         {
             context.Categories.Remove(context.Categories.FirstOrDefault(s => s.Id == id));
+            context.SaveChanges();
             return 1;
         }
 
