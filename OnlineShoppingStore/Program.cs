@@ -22,13 +22,27 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromDays(30);
+});
+
 builder.Services.AddTransient(typeof(IServiceBase<Category>), typeof(CategoryService));
 
 builder.Services.AddTransient(typeof(IServiceBase<Product>), typeof(ProductService));
 
-
+builder.Services.AddMvc()
+               .AddJsonOptions(opt =>
+               {
+                   opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+               });
 var app = builder.Build();
 
+builder.Services.AddSession();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -49,9 +63,12 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();
