@@ -1,16 +1,37 @@
 ﻿@model List<Product>
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "productsOfCategory";
-       Layout = "~/Views/Shared/_CustomerwithoutSlideLayout.cshtml";
+    Layout = "~/Views/Shared/_CustomerwithoutSlideLayout.cshtml";
 
-}
+    decimal Subtotal= 0;
+    decimal  Total= 0;
+    int? countSavedproducts = 0;
+    List<Product>? productSelected =new List<Product>();
+    
+
+    @foreach(var product in Model)
+    {
+        Subtotal += product.Price;
+    }
+    Total = 150+Subtotal;
+    if(HttpContextAccessor.HttpContext.Session.GetString("Savedproducts") != null)
+    {
+        var productsSerialized = HttpContextAccessor.HttpContext.Session.GetString("Savedproducts");
+        productSelected =JsonConvert.DeserializeObject<List<Product>>(productsSerialized);
+        countSavedproducts = HttpContextAccessor.HttpContext.Session.GetInt32("countSavedproducts");
+    }
+    
+   }
    
  <div class="container">
 
     <h2 class="mt-5"><i class="fa fa-shopping-cart"></i> Shooping Cart</h2>
     <hr>
 
-    <h4 class="mt-5">4 items(s) in Shopping Cart</h4>
+    <h4 class="mt-5">@HttpContextAccessor.HttpContext.Session.GetInt32("count") items(s) in Shopping Cart</h4>
 
     <div class="cart-items">
         
@@ -32,8 +53,8 @@
                             
                             <td>
         
-                                <a href="">Remove</a><br>
-                                <a href="">Save for later</a>
+                                <a  asp-controller="Customer" asp-action="RemoveProductfromCart" asp-route-productId="@product.Id">Remove</a><br>
+                                <a asp-controller="Customer" asp-action="SavaProductLaterShopping" asp-route-productId="@product.Id">Save for later</a>
 
                             </td>
                             
@@ -43,7 +64,6 @@
                                     <option value="">2</option>
                                 </select>
                             </td>
-                            
                             <td>@product.Price</td>
                         </tr>
                         }
@@ -64,15 +84,15 @@
                                 </thead>
                                     <tr>
                                         <td>Subtotal </td>
-                                        <td>12500.00 </td>
+                                        <td>@Subtotal </td>
                                     </tr>
                                     <tr>
                                         <td>Text</td>
-                                        <td>2133.00</td>
+                                        <td>150.00</td>
                                     </tr>
                                     <tr>
                                         <th>Total</th>
-                                        <th>1,8444</th>
+                                        <th>@Total</th>
                                     </tr>
                              </table>           
                          </div>
@@ -86,22 +106,23 @@
                 </div>
 
                 <div class="col-md-12">
-                
-                <h4>2 items Save for Later</h4>
-                <table class="table">
+                @if(countSavedproducts> 0 ) 
+                {
+                    <h4>@countSavedproducts items Save for Later</h4>
+                    <table class="table">
                     
-                    <tbody>
-                        
-                        <tr>
-                            <td><img src="" style="width: 5em"></td>
+                      <tbody>
+                        @foreach(var product in productSelected)
+                        {
+                             <tr>
+                            <td><img src="data:image/*;base64,@(Convert.ToBase64String(product.Image))" style="width: 5em"></td>
                             <td>
-                                <strong>Mac</strong><br> This is some text for the product
+                                <strong>@product.Name</strong><br> @product.Description
                             </td>
                             
                             <td>
         
-                                <a href="">Remove</a><br>
-                                <a href="">Save for later</a>
+                                <a asp-controller="Customer" asp-action="RemoveProductfromLaterList" asp-route-productId="@product.Id">Remove</a><br>
 
                             </td>
                             
@@ -112,58 +133,15 @@
                                 </select>
                             </td>
                             
-                            <td>$233</td>
+                            <td>@product.Price</td>
                         </tr>
-
-                        <tr>
-                            <td><img src="images/01.jpg" style="width: 5em"></td>
-                            <td>
-                                <strong>Laptop</strong><br> This is some text for the product
-                            </td>
-                            
-                            <td>
-        
-                                <a href="">Remove</a><br>
-                                <a href="">Save for later</a>
-
-                            </td>
-                            
-                            <td>
-                                <select name="" id="" class="form-control" style="width: 4.7em">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                </select>
-                            </td>
-                            
-                            <td>$233</td>
-                        </tr>
-
-                        <tr>
-                            <td><img src="images/12.jpg" style="width: 5em"></td>
-                            <td>
-                                <strong>Laptop</strong><br> This is some text for the product
-                            </td>
-                            
-                            <td>
-        
-                                <a href="">Remove</a><br>
-                                <a href="">Save for later</a>
-
-                            </td>
-                            
-                            <td>
-                                <select name="" id="" class="form-control" style="width: 4.7em">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                </select>
-                            </td>
-                            
-                            <td>$233</td>
-                        </tr>
-
+                        }
+                       
                     </tbody>
 
-                </table>
+                  </table>
+                }
+               
 
             </div>  
                 </div>

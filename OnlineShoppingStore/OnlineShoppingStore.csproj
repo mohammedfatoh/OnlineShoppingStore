@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="NewFolder\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\AdminStyle\css\sb-admin.css" />
     <None Include="wwwroot\AdminStyle\css\sb-admin.min.css" />
     <None Include="wwwroot\AdminStyle\js\demo\chart-area-demo.js" />

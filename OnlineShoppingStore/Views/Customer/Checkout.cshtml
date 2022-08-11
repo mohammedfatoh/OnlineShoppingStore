@@ -2,6 +2,14 @@
 @{
     ViewData["Title"] = "Checkout";
     Layout = "~/Views/Shared/_CustomerwithoutSlideLayout.cshtml";
+
+     decimal Subtotal= 0;
+    decimal  Total= 0;
+    @foreach(var product in Model)
+    {
+        Subtotal += product.Price;
+    }
+     Total = 150+Subtotal;
 }
 
 <!-- Page Content -->
@@ -102,15 +110,15 @@
                     </tr>
                     <tr>
                         <td>Subtotal</td>
-                        <td>$1200</td>
+                        <td>@Subtotal</td>
                     </tr>
                     <tr>
                         <td>Tax</td>
-                        <td>$0</td>
+                        <td>$150</td>
                     </tr>
                     <tr>
                         <th>Total</th>
-                        <th>1200</th>
+                        <th>@Total</th>
                     </tr>
                     
                 </table>
