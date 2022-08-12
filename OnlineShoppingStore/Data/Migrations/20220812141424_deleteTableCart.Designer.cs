@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShoppingStore.Data;
 
@@ -11,9 +12,10 @@ using OnlineShoppingStore.Data;
 namespace OnlineShoppingStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220812141424_deleteTableCart")]
+    partial class deleteTableCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,6 +299,9 @@ namespace OnlineShoppingStore.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("AmountPaid")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -308,32 +313,21 @@ namespace OnlineShoppingStore.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameonCard")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PaymentType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -391,21 +385,6 @@ namespace OnlineShoppingStore.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.Property<int>("OrdersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrdersId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("OrderProduct");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -479,21 +458,6 @@ namespace OnlineShoppingStore.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.HasOne("OnlineShoppingStore.Models.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnlineShoppingStore.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.ApplicationUser", b =>

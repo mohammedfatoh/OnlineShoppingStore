@@ -32,14 +32,14 @@ namespace OnlineShoppingStore.Models
         public int Quantity { get; set; }
 
         [Required]
-        [Range(typeof(decimal), "1", "50000", ErrorMessage = "Invalid price")]
+        [Range(typeof(decimal), "1", "70000", ErrorMessage = "Invalid price")]
         public decimal Price { get; set; }
 
         public int CategoryId { get; set; }
 
         public virtual Category? Category { get; set; }
 
-        public virtual ICollection<Cart>? Carts { get; set; }
+        public virtual ICollection<Order>? Orders { get; set; }
 
     }
 }
