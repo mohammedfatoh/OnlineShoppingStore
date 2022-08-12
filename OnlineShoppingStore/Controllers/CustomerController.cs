@@ -12,9 +12,9 @@ namespace OnlineShoppingStore.Controllers
         private readonly IServiceBase<Product> productService;
 
 
-        public CustomerController(IServiceBase<Category> categoryService, 
+        public CustomerController(IServiceBase<Category> categoryService,
             IServiceBase<Product> productService)
-            
+
         {
             this.productService = productService;
             this.categoryService = categoryService;
@@ -44,7 +44,7 @@ namespace OnlineShoppingStore.Controllers
         // GET: AddToCart  
         public ActionResult AddToCart(int productId)
         {
-            Product product =productService.GetDetails(productId);
+            Product product = productService.GetDetails(productId);
             decimal newprice = product.Price;
             if (String.IsNullOrEmpty(HttpContext.Session.GetString("cart")))
             {
@@ -65,12 +65,12 @@ namespace OnlineShoppingStore.Controllers
             }
             else
             {
-                  var str = HttpContext.Session.GetString("cart");
-                 var productSelected = JsonConvert.DeserializeObject<List<Product>>(str);
+                var str = HttpContext.Session.GetString("cart");
+                var productSelected = JsonConvert.DeserializeObject<List<Product>>(str);
 
                 var ProductExist = productSelected.Find(p => p.Id == productId);
-               if(ProductExist != null)
-               {
+                if (ProductExist != null)
+                {
                     ProductExist.Quantity += 1;
                     ProductExist.Price += newprice;
                 }
@@ -88,15 +88,15 @@ namespace OnlineShoppingStore.Controllers
                 ViewBag.cart = productSelected.Count();
                 int? count = HttpContext.Session.GetInt32("count");
                 HttpContext.Session.SetInt32("count", (int)(count + 1));
-               
+
             }
-            return RedirectToAction("productsOfCategory",new { categoryName = product.Category.Name } );
+            return RedirectToAction("productsOfCategory", new { categoryName = product.Category.Name });
 
 
-    }
+        }
         public ActionResult Cart()
         {
-            
+
             if (!String.IsNullOrEmpty(HttpContext.Session.GetString("cart")))
             {
                 var productSeilalized = HttpContext.Session.GetString("cart");
@@ -116,23 +116,23 @@ namespace OnlineShoppingStore.Controllers
             Product product = productService.GetDetails(productId);
             var productSeilalized = HttpContext.Session.GetString("cart");
             var productSelected = JsonConvert.DeserializeObject<List<Product>>(productSeilalized);
-            
-             productSelected.Remove(productSelected.Find(p => p.Id == productId));
-           
-            
-                HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(productSelected, Formatting.None,
-                      new JsonSerializerSettings()
-                      {
-                          ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                      }));
 
-                ViewBag.cart = productSelected.Count();
-                int? count = HttpContext.Session.GetInt32("count");
-                 if(count > 0)
-                     HttpContext.Session.SetInt32("count", (int)(count - 1));
+            productSelected.Remove(productSelected.Find(p => p.Id == productId));
 
-               
-            
+
+            HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(productSelected, Formatting.None,
+                  new JsonSerializerSettings()
+                  {
+                      ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                  }));
+
+            ViewBag.cart = productSelected.Count();
+            int? count = HttpContext.Session.GetInt32("count");
+            if (count > 0)
+                HttpContext.Session.SetInt32("count", (int)(count - 1));
+
+
+
             return RedirectToAction("Cart");
         }
 
@@ -153,7 +153,7 @@ namespace OnlineShoppingStore.Controllers
                 RemoveProductfromCart(productId);
                 ViewBag.cart = productSelected.Count();
                 HttpContext.Session.SetInt32("countSavedproducts", 1);
-                
+
 
             }
             else
@@ -190,10 +190,10 @@ namespace OnlineShoppingStore.Controllers
                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                   }));
 
-            
+
             int? count = HttpContext.Session.GetInt32("countSavedproducts");
             if (count > 0)
-               HttpContext.Session.SetInt32("countSavedproducts", (int)(count - 1));
+                HttpContext.Session.SetInt32("countSavedproducts", (int)(count - 1));
 
             return RedirectToAction("Cart");
         }
@@ -226,7 +226,7 @@ namespace OnlineShoppingStore.Controllers
         public ActionResult IncreaseproductQuantity(int productId)
         {
             Product product = productService.GetDetails(productId);
-            decimal Productprice= product.Price;
+            decimal Productprice = product.Price;
             var str = HttpContext.Session.GetString("cart");
             var productSelected = JsonConvert.DeserializeObject<List<Product>>(str);
 
@@ -275,23 +275,25 @@ namespace OnlineShoppingStore.Controllers
 
             ViewBag.cart = productSelected.Count();
             int? count = HttpContext.Session.GetInt32("count");
-            if(count > 0)
-               HttpContext.Session.SetInt32("count", (int)(count - 1));
+            if (count > 0)
+                HttpContext.Session.SetInt32("count", (int)(count - 1));
             return View("Cart", productSelected);
         }
 
         public ActionResult Checkout()
         {
 
-            if (!String.IsNullOrEmpty(HttpContext.Session.GetString("cart")))
-            {
-                var productSeilalized = HttpContext.Session.GetString("cart");
-                var productSelected = JsonConvert.DeserializeObject<List<Product>>(productSeilalized);
-                return View(productSelected);
-            }
-            return View("CartShoppingEmpty");
+            
+            return View();
         }
 
-
-   }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Checkout(Order order)
+        {
+            if(!ModelState.IsValid)
+                return View(order);
+            return View(order);
+        }
+    }
 }

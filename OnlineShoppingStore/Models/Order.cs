@@ -26,20 +26,20 @@ namespace OnlineShoppingStore.Models
         public string NameonCard { get; set; }
 
         [Required]
-        public string Country { get; set; }
-
-        [Required]
         public decimal TotalPrice { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }
 
+        [Required]
+        public DateTime DeliveryDate { get; set; }
+
         [Required,CreditCard]
-        public string PaymentType { get; set; }
+        public string? CreditcardNumber { get; set; }
 
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser? User { get; set; }
 
         public virtual ICollection<Product>? Products { get; set; }
 
