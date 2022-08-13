@@ -35,6 +35,8 @@ builder.Services.AddTransient(typeof(IServiceBase<Category>), typeof(CategorySer
 
 builder.Services.AddTransient(typeof(IServiceBase<Product>), typeof(ProductService));
 
+builder.Services.AddTransient(typeof(IServiceBase<Order>), typeof(OrderService));
+
 builder.Services.AddMvc()
                .AddJsonOptions(opt =>
                {

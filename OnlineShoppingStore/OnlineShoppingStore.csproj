@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\Admin2Style\.idea\modules.xml" />
+    <Content Include="wwwroot\Admin2Style\.idea\workspace.xml" />
     <Content Include="wwwroot\CustomerStyle\.idea\modules.xml" />
     <Content Include="wwwroot\CustomerStyle\.idea\workspace.xml" />
   </ItemGroup>
@@ -26,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Admin2Style\.idea\admin.iml" />
     <None Include="wwwroot\AdminStyle\css\sb-admin.css" />
     <None Include="wwwroot\AdminStyle\css\sb-admin.min.css" />
     <None Include="wwwroot\AdminStyle\js\demo\chart-area-demo.js" />

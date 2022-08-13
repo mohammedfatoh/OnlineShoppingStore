@@ -10,10 +10,19 @@
     <link href="~/AdminStyle/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <!-- Custom fonts for this template-->
     <link href="~/AdminStyle/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+
     <!-- Page level plugin CSS-->
     <link href="~/AdminStyle/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="~/AdminStyle/css/sb-admin.css" rel="stylesheet">
+
+    <link href="~/Admin2Style/assets/css/themify-icons.css" rel="stylesheet">
+
+        <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+
+    <link href="~/Admin2Style/assets/css/animate.min.css" rel="stylesheet"/>
+
 </head>
 <body id="page-top">
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -73,37 +82,37 @@
     </nav>
     <div id="wrapper">
         <!-- Sidebar -->
-        <ul class="sidebar navbar-nav">
+        <ul class="sidebar  navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" href="../Admin/Dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="ti-panel"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="../Admin/Categories">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="ti-archive"></i>
                     <span>Categories</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../Admin/Products">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="ti-view-list-alt"></i>
                     <span>Products</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
+                <a class="nav-link" href="../Admin/Orders">
+                    <i class="ti-calendar"></i>
                     <span>Orders</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="../Users/Index">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fa fa-users"></i>
                     <span>Users</span>
                 </a>
             </li>
@@ -121,7 +130,7 @@
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright © My Online Shopping Store 2018</span>
+                        <span>Copyright © My Online Shopping Store @DateTime.Now.Year</span>
                     </div>
                 </div>
             </footer>
@@ -170,3 +179,5 @@
 <!-- Demo scripts for this page-->
 <script src="~/AdminStyle/js/demo/datatables-demo.js"></script>
 <script src="~/AdminStyle/js/demo/chart-area-demo.js"></script>
+
+

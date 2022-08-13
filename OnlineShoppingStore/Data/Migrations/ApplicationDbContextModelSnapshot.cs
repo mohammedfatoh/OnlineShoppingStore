@@ -331,7 +331,6 @@ namespace OnlineShoppingStore.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -462,9 +461,7 @@ namespace OnlineShoppingStore.Data.Migrations
                 {
                     b.HasOne("OnlineShoppingStore.Models.ApplicationUser", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

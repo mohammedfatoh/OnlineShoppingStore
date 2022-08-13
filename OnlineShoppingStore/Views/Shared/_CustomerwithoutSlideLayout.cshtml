@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
+@inject SignInManager<ApplicationUser> SignInManager
+
 @{
     Layout = null;
     int mySessionObject;
@@ -54,11 +56,20 @@
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i> Account
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                      @if (!SignInManager.IsSignedIn(User))
+                       {
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
                         <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Sign In</a>
                         <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
-                    </div>
-                </li>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+                            </div>
+                        }
+                    </li>
             </ul>
         </div>
     </div>
@@ -70,5 +81,8 @@
 
     <script src="~/CustomerStyle/vendor/jquery/jquery.min.js"></script>
    <script src="~/CustomerStyle/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

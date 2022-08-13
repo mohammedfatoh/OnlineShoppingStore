@@ -8,11 +8,14 @@ namespace OnlineShoppingStore.Controllers
     {
         private readonly IServiceBase<Category> categoryService;
         private readonly IServiceBase<Product> productService;
+        private readonly IServiceBase<Order> orderService;
         public AdminController(IServiceBase<Category> categoryService,
-            IServiceBase<Product> productService)
+            IServiceBase<Product> productService,
+            IServiceBase<Order> orderService)
         {
             this.categoryService = categoryService;
             this.productService = productService;
+            this.orderService = orderService;
         }
         public IActionResult Dashboard()
         {
@@ -205,5 +208,11 @@ namespace OnlineShoppingStore.Controllers
             productService.Delete(id);
             return RedirectToAction("Products");
         }
+
+        public IActionResult Orders()
+        {
+            return View(orderService.GetAll());
+        }
+
     }
 }

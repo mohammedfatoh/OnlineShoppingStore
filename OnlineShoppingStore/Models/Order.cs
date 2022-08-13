@@ -28,14 +28,14 @@ namespace OnlineShoppingStore.Models
         [Required]
         public decimal TotalPrice { get; set; }
 
-        [Required]
         public DateTime CreatedDate { get; set; }
 
-        [Required]
         public DateTime DeliveryDate { get; set; }
 
         [Required,CreditCard]
-        public string? CreditcardNumber { get; set; }
+        public string CreditcardNumber { get; set; }
+
+        public string StatusOfOrder { get; set; }
 
         public string? UserId { get; set; }
 

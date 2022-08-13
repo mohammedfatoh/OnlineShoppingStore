@@ -39,6 +39,7 @@
             <h4>Billing Details</h4>
 
                <form asp-action="Checkout" asp-controller="Customer" asp-antiforgery="true" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                        <label asp-for="Email"></label>
@@ -89,8 +90,6 @@
                        <span asp-validation-for="CreditcardNumber" class="text-danger"></span>
                   </div>
                   <input asp-for="TotalPrice" value=@Total class="form-control" hidden/>
-                  <input asp-for="CreatedDate" value=@DateTime.Now class="form-control" hidden/>
-                   <input asp-for="DeliveryDate" value=@DateTime.Now.Date.AddDays(5) class="form-control" hidden/>
                   <button type="submit" class="btn btn-outline-info col-md-12">Complete Order</button>
                 </form>
 
