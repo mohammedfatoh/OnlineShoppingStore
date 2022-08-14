@@ -39,7 +39,10 @@ namespace OnlineShoppingStore.Models
 
         public virtual Category? Category { get; set; }
 
-        public virtual ICollection<Order>? Orders { get; set; }
+
+
+        public virtual ICollection<OrderProduct>? OrderProducts { get; set; }
+
 
     }
 }

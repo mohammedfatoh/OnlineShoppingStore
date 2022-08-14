@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShoppingStore.Data;
 
@@ -11,9 +12,10 @@ using OnlineShoppingStore.Data;
 namespace OnlineShoppingStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220814164318_AddingDomainModelOrderProduct2")]
+    partial class AddingDomainModelOrderProduct2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -311,9 +313,6 @@ namespace OnlineShoppingStore.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Quantities")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("StatusOfOrder")
                         .HasColumnType("nvarchar(max)");
 
@@ -383,6 +382,9 @@ namespace OnlineShoppingStore.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -392,6 +394,8 @@ namespace OnlineShoppingStore.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Products");
                 });
@@ -483,6 +487,10 @@ namespace OnlineShoppingStore.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OnlineShoppingStore.Models.Order", null)
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId");
+
                     b.Navigation("Category");
                 });
 
@@ -499,6 +507,8 @@ namespace OnlineShoppingStore.Data.Migrations
             modelBuilder.Entity("OnlineShoppingStore.Models.Order", b =>
                 {
                     b.Navigation("OrderProducts");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Models.Product", b =>

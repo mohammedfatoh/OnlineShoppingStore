@@ -26,6 +26,7 @@
                                         <th>User</th>
                                         <th>Product</th>
                                         <th>Quantity</th>
+                                        <th>TotalPrice</th>
                                         <th>Address</th>
                                         <th>Status</th>
                                         <th>Actions</th>
@@ -37,22 +38,61 @@
                                           <tr>
                                            
                                           <td>@order.Name</td>
-                                          <td> @foreach(var product in order.Products)
+                                          <td>@foreach(var orderProducts in order.OrderProducts)
                                                     {
-                                                        @product.Name
-                                                        
+                                                        @orderProducts.Product.Name;
+                                                        <br/>
                                                     }
                                                 </td>
-                                          <td>2</td>
+                                          <td>@foreach(var orderProducts in order.Quantities)
+                                                    {
+                                                        if(orderProducts.Equals('_'))
+                                                        {
+                                                            <br/>
+                                                        }
+                                                        else
+                                                        {
+                                                             @orderProducts;
+                                                        }
+                                                       
+                                                        
+                                                    }</td>
+                                                    <td>@order.TotalPrice</td>
                                           <td>@order.Address</td>
-                                           <td><span class="label label-success">Confirmed</span></td>
-                                          <td>
-                                            <button class="btn btn-sm btn-success ti-close"
-                                                    title="Cancel Order"></button>
+                                          @if(order.StatusOfOrder.Equals("Confirmed"))
+                                                {
+                                                    <td><span class="label label-success">@order.StatusOfOrder</span></td>
 
-                                            <button class="btn btn-sm btn-primary ti-view-list-alt"
+                                                }
+                                                else
+                                                {
+                                                    <td><span class="label label-warning">@order.StatusOfOrder</span></td>
+                                                    
+                                                }
+
+                                                 @if(order.StatusOfOrder.Equals("Confirmed"))
+                                                {
+                                                   <td>
+                                                      <button class="btn btn-sm btn-success ti-close"
+                                                      title="Cancel Order"></button>
+
+                                                    <button class="btn btn-sm btn-primary ti-view-list-alt"
                                                     title="Details"></button>
-                                          </td>
+                                                   </td>
+
+                                                }
+                                                else
+                                                {
+                                                    
+                                                  <td>
+                                                     <button class="btn btn-sm btn-success ti-check"
+                                                           title="Confirm Order"></button>
+
+                                                         <button class="btn btn-sm btn-primary ti-view-list-alt"
+                                                       title="Details"></button>
+                                                   </td>
+                                                }
+                                                
                                           </tr>
 
                                         }

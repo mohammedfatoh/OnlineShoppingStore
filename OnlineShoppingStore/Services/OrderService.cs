@@ -15,6 +15,7 @@ namespace OnlineShoppingStore.Services
         {
             Model.CreatedDate = DateTime.Now;
             Model.DeliveryDate = DateTime.Parse(System.DateTime.Now.AddDays(5).ToString("yyyy-MM-dd"));
+            Model.StatusOfOrder = StatusOfOrder.PendingStatus;
             context.Orders.Add(Model);
             context.SaveChanges();
             return Model.Id;

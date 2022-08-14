@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Models\Order.cs~RF9c12f2c.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\Admin2Style\.idea\modules.xml" />
     <Content Include="wwwroot\Admin2Style\.idea\workspace.xml" />
     <Content Include="wwwroot\CustomerStyle\.idea\modules.xml" />

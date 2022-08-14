@@ -30,15 +30,27 @@ namespace OnlineShoppingStore.Data
             builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins", "Security");
             builder.Entity<IdentityRoleClaim<string>>().ToTable("Roleclaims ", "Security");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens", "Security");
+
+            builder.Entity<OrderProduct>()
+                .HasKey(t => new { t.OrderId, t.ProductId });
+
+            builder.Entity<OrderProduct>()
+                .HasOne(pt => pt.Order)
+                .WithMany(p => p.OrderProducts)
+                .HasForeignKey(pt => pt.OrderId);
+
+            builder.Entity<OrderProduct>()
+               .HasOne(pt => pt.Product)
+               .WithMany(p => p.OrderProducts)
+               .HasForeignKey(pt => pt.ProductId);
         }
 
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
 
         public virtual DbSet<Order> Orders { get; set; }
-       
-        public virtual DbSet<CartStatus> CartStatuses { get; set; }
 
+        public virtual DbSet<OrderProduct> OrderProduct { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

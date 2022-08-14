@@ -35,13 +35,15 @@ namespace OnlineShoppingStore.Models
         [Required,CreditCard]
         public string CreditcardNumber { get; set; }
 
-        public string StatusOfOrder { get; set; }
+        public string? StatusOfOrder { get; set; }
+
+        public string? Quantities { get; set; }
 
         public string? UserId { get; set; }
 
         public virtual ApplicationUser? User { get; set; }
 
-        public virtual ICollection<Product>? Products { get; set; }
+        public virtual ICollection<OrderProduct>? OrderProducts { get; set; }
 
     }
 }

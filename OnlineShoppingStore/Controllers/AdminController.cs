@@ -214,5 +214,9 @@ namespace OnlineShoppingStore.Controllers
             return View(orderService.GetAll());
         }
 
+        public IActionResult DetailsOrder()
+        {
+            return View();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using OnlineShoppingStore.Data;
 using OnlineShoppingStore.Models;
 using OnlineShoppingStore.Services;
 
@@ -14,12 +15,14 @@ namespace OnlineShoppingStore.Controllers
         private readonly IServiceBase<Order> orderService;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationDbContext context;
 
         public CustomerController(IServiceBase<Category> categoryService,
             IServiceBase<Product> productService,
             IServiceBase<Order> orderService,
             SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext context)
 
         {
             this.productService = productService;
@@ -27,6 +30,7 @@ namespace OnlineShoppingStore.Controllers
             this.orderService = orderService;
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.context = context;
         }
         public IActionResult Index()
         {
@@ -306,7 +310,28 @@ namespace OnlineShoppingStore.Controllers
                 return View(order);
             try
             {
-                orderService.Add(order);
+               
+                if (!String.IsNullOrEmpty(HttpContext.Session.GetString("cart")))
+                {
+
+                    var str = HttpContext.Session.GetString("cart");
+                    var productSelected = JsonConvert.DeserializeObject<List<Product>>(str);
+                    foreach (var product in productSelected)
+                    {
+                        order.Quantities += product.Quantity;
+                        order.Quantities += '_';
+                    }
+                    order.Quantities = order.Quantities.Remove(order.Quantities.Length -1);
+                        int orderId = orderService.Add(order);
+
+
+                    foreach (var product in productSelected)
+                    {
+                       context.OrderProduct.Add(new OrderProduct{ OrderId = orderId , ProductId = product.Id });
+                    }
+                    context.SaveChanges();
+
+                }
                 HttpContext.Session.SetString("cart", "");
                 HttpContext.Session.SetInt32("count", 0);
                 return RedirectToAction("Index");
