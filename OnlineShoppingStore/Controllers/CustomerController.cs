@@ -40,7 +40,7 @@ namespace OnlineShoppingStore.Controllers
                 Namescategories.Add(category.Name);
             }
             ViewBag.NamesCategories = Namescategories;
-            return View();
+            return View(productService.GetAll());
         }
 
         public IActionResult productsOfCategory(string categoryName)

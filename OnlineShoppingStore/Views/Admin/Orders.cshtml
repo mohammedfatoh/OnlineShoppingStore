@@ -73,11 +73,11 @@
                                                  @if(order.StatusOfOrder.Equals("Confirmed"))
                                                 {
                                                    <td>
-                                                      <button class="btn btn-sm btn-success ti-close"
-                                                      title="Cancel Order"></button>
+                                                      <a asp-controller="Admin" asp-action="CancelOrder" asp-route-orderId="@order.Id" class="btn btn-sm btn-success ti-close"
+                                                      title="Cancel Order"></a>
 
-                                                    <button class="btn btn-sm btn-primary ti-view-list-alt"
-                                                    title="Details"></button>
+                                                    <a asp-controller="Admin" asp-action="DetailsOrder" asp-route-orderId="@order.Id" class="btn btn-sm btn-primary ti-view-list-alt"
+                                                    title="Details"></a>
                                                    </td>
 
                                                 }
@@ -85,11 +85,11 @@
                                                 {
                                                     
                                                   <td>
-                                                     <button class="btn btn-sm btn-success ti-check"
-                                                           title="Confirm Order"></button>
+                                                     <a asp-controller="Admin" asp-action="ConfirmOrder" asp-route-orderId="@order.Id" class="btn btn-sm btn-success ti-check"
+                                                           title="Confirm Order"></a>
 
-                                                         <button class="btn btn-sm btn-primary ti-view-list-alt"
-                                                       title="Details"></button>
+                                                         <a asp-controller="Admin" asp-action="DetailsOrder" asp-route-orderId="@order.Id" class="btn btn-sm btn-primary ti-view-list-alt"
+                                                       title="Details"></a>
                                                    </td>
                                                 }
                                                 

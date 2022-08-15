@@ -9,13 +9,17 @@ namespace OnlineShoppingStore.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IServiceBase<Category> categoryService;
+        private readonly IServiceBase<Product> productService;
+
 
 
         public HomeController(ILogger<HomeController> logger,
-            IServiceBase<Category> categoryService)
+            IServiceBase<Category> categoryService,
+            IServiceBase<Product> productService)
         {
             _logger = logger;
             this.categoryService = categoryService;
+            this.productService = productService;
         }
 
         public IActionResult Index()
@@ -26,7 +30,7 @@ namespace OnlineShoppingStore.Controllers
                 Namescategories.Add(category.Name);
             }
             ViewBag.NamesCategories = Namescategories;
-            return View();
+            return View(productService.GetAll());
         }
 
         public IActionResult Privacy()

@@ -1,32 +1,11 @@
 ﻿@model Order
-@using Microsoft.AspNetCore.Http
-@using Newtonsoft.Json
-@inject IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "Checkout";
-    Layout = "~/Views/Shared/_CustomerwithoutSlideLayout.cshtml";
-
-    decimal Subtotal= 0;
-    decimal  Total= 0;
-    List<Product>? productSelected =new List<Product>();
-
-    
-    if(HttpContextAccessor.HttpContext.Session.GetString("cart") != null)
-    {
-        var productsSerialized = HttpContextAccessor.HttpContext.Session.GetString("cart");
-        productSelected =JsonConvert.DeserializeObject<List<Product>>(productsSerialized);
-       
-    }
-
-    @foreach(var product in productSelected)
-    {
-        Subtotal += product.Price;
-    }
-     Total = 150+Subtotal;
-
+    ViewData["Title"] = "DetailsOrder";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    decimal Subtotal = Model.TotalPrice - 150;
+    int Startplace = 0;
 }
 
-<!-- Page Content -->
 <div class="container">
 
     <h2 class="mt-5"><i class="fa  fa-credit-card-alt"></i> Checkout</h2>
@@ -38,33 +17,33 @@
         <div class="col-md-7">  
             <h4>Billing Details</h4>
 
-               <form asp-action="Checkout" asp-controller="Customer" asp-antiforgery="true" method="post">
+               <form >
                     <div asp-validation-summary="All" class="text-danger"></div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                        <label asp-for="Email"></label>
-                       <input asp-for="Email" class="form-control" placeholder="Email"/>
+                       <input asp-for="Email" class="form-control" placeholder="Email" disabled/>
                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                       <label asp-for="Name"></label>
-                       <input asp-for="Name" class="form-control" placeholder="Name"/>
+                       <input asp-for="Name" class="form-control" placeholder="Name" disabled/>
                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                   </div>
                   <div class="form-group">
                        <label asp-for="Address"></label>
-                       <input asp-for="Address" class="form-control" placeholder="Address"/>
+                       <input asp-for="Address" class="form-control" placeholder="Address"disabled/>
                        <span asp-validation-for="Address" class="text-danger"></span>
                   </div>
                   <div class="form-row">
                       <label asp-for="City"></label>
-                       <input asp-for="City" class="form-control" placeholder="City"/>
+                       <input asp-for="City" class="form-control" placeholder="City" disabled/>
                        <span asp-validation-for="City" class="text-danger"></span>
                   </div>
                   <div class="form-group">
                     <label asp-for="Phone"></label>
-                       <input asp-for="Phone" class="form-control" placeholder="Phone"/>
+                       <input asp-for="Phone" class="form-control" placeholder="Phone" disabled/>
                        <span asp-validation-for="Phone" class="text-danger"></span>
                   </div>
                   <hr>
@@ -72,17 +51,17 @@
 
                   <div class="form-group">
                      <label asp-for="NameonCard"></label>
-                       <input asp-for="NameonCard" class="form-control" placeholder="Name on Card"/>
+                       <input asp-for="NameonCard" class="form-control" placeholder="Name on Card"disabled/>
                        <span asp-validation-for="NameonCard" class="text-danger"></span>
                   </div>
 
                   <div class="form-group">
                        <label asp-for="CreditcardNumber"></label>
-                       <input asp-for="CreditcardNumber" class="form-control" placeholder="Credit Card Number"/>
+                       <input asp-for="CreditcardNumber" class="form-control" placeholder="Credit Card Number" disabled/>
                        <span asp-validation-for="CreditcardNumber" class="text-danger"></span>
                   </div>
-                  <input asp-for="TotalPrice" value=@Total class="form-control" hidden/>
-                  <button type="submit" class="btn btn-outline-info col-md-12">Complete Order</button>
+                  <input asp-for="TotalPrice"  class="form-control" hidden/>
+                  <a  asp-controller="Admin" asp-action="Orders" class="btn btn-outline-info col-md-12">Back to Orders</a>
                 </form>
 
             </div>
@@ -97,17 +76,32 @@
                         <th>Details</th>
                         <th>Qty</th>
                     </tr>
-                    @foreach(var product in productSelected)
+                    @foreach(var orderProduct in Model.OrderProducts)
                     {
+                      
                        <tr>
-                        <td><img src="data:image/*;base64,@(Convert.ToBase64String(product.Image))" alt="" style="width: 4em"></td>
+                        <td><img src="data:image/*;base64,@(Convert.ToBase64String(orderProduct.Product.Image))" alt="" style="width: 4em"></td>
                         <td>
-                            <strong>@product.Name</strong><br>
-                            @product.Description <br> 
-                            <span class="text-dark">@product.Price</span>
+                            <strong>@orderProduct.Product.Name</strong><br>
+                            @orderProduct.Product.Description <br> 
+                            <span class="text-dark">@orderProduct.Product.Price</span>
                         </td>
-                        <td>
-                            <span class="badge badge-light">@product.Quantity</span>
+                        
+                         <td>
+                            @for(int i = Startplace; i<  Model.Quantities.Length;i++)
+                            {
+                                  if(Model.Quantities[i].Equals('_'))
+                                  {
+                                    Startplace = i+1;
+                                    <br/>
+                                    break;
+                                  }
+                                  else
+                                  {
+                                   <span class="badge badge-light"> @Model.Quantities[i]</span>
+                                   }
+                              }
+                            
                         </td>
                       </tr>
                    }
@@ -130,7 +124,7 @@
                     </tr>
                     <tr>
                         <th>Total</th>
-                        <th>@Total</th>
+                        <th>@Model.TotalPrice</th>
                     </tr>
                     
                 </table>
@@ -141,4 +135,4 @@
 </div>
 <!-- /.container -->
 
-<div class="mt-5"><hr></div>
+<div class="mt-5

@@ -214,9 +214,25 @@ namespace OnlineShoppingStore.Controllers
             return View(orderService.GetAll());
         }
 
-        public IActionResult DetailsOrder()
+        public IActionResult DetailsOrder(int orderId)
         {
-            return View();
+            Order order =  orderService.GetDetails(orderId);
+            return View(order);
+        }
+
+        public IActionResult ConfirmOrder(int orderId)
+        {
+            Order order =new Order();
+            order.StatusOfOrder = StatusOfOrder.ConfirmedStatus;
+            orderService.Update(orderId, order);
+            return RedirectToAction("Orders");
+        }
+
+        public IActionResult CancelOrder(int orderId)
+        {
+            Order order = new Order();
+            orderService.Delete(orderId);
+            return RedirectToAction("Orders");
         }
     }
 }

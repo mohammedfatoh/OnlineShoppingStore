@@ -45,7 +45,12 @@ namespace OnlineShoppingStore.Services
 
         public int Update(int id, Order Model)
         {
-            throw new NotImplementedException();
+            Order order = GetDetails(id);
+            order.StatusOfOrder = Model.StatusOfOrder;
+
+            context.Orders.Update(order);
+            context.SaveChanges();
+            return id;
         }
     }
 }
