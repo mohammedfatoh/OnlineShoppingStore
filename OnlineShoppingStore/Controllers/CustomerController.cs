@@ -497,7 +497,19 @@ namespace OnlineShoppingStore.Controllers
             ViewBag.NamesCategories = Namescategories;
             return View(user.Orders.ToList());
         }
-        
+
+        public IActionResult SearchOfproducts(string productName)
+        {
+            ViewBag.ProductName = productName;
+            List<string> Namescategories = new List<string>();
+            foreach (var category in categoryService.GetAll())
+            {
+                Namescategories.Add(category.Name);
+            }
+            ViewBag.NamesCategories = Namescategories;
+            return View("productsOfCategory", (productService.GetAll().Where(p => p.Name.Contains(productName)).ToList()));
+        }
+
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
