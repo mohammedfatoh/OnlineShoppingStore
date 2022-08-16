@@ -486,6 +486,18 @@ namespace OnlineShoppingStore.Controllers
             return RedirectToAction("DetailsOfProduct", new { productId = productId });
         }
 
+        public async Task<IActionResult> CustomerOrders()
+        {
+            ApplicationUser user = await userManager.GetUserAsync(User);
+            List<string> Namescategories = new List<string>();
+            foreach (var category in categoryService.GetAll())
+            {
+                Namescategories.Add(category.Name);
+            }
+            ViewBag.NamesCategories = Namescategories;
+            return View(user.Orders.ToList());
+        }
+        
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
