@@ -11,13 +11,14 @@
        @foreach(var product in Model)
        {
         <div class="col-lg-3 col-md-6 mb-4">
+            <a asp-action="DetailsOfProduct" asp-controller="Customer"  asp-route-productId=@product.Id>
             <div class="card">
                 <img class="card-img-top" src="data:image/*;base64,@(Convert.ToBase64String(product.Image))" alt="">
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
-                    <p class="card-text">
+                  @*  <p class="card-text">
                         @product.Description
-                    </p>
+                    </p>*@
                 </div>
                 <div class="card-footer"> 
                     <strong>@product.Price</strong> &nbsp;
@@ -25,6 +26,7 @@
                         Cart</a>
                 </div>
             </div>
+            </a>
         </div>
       }
   </div>

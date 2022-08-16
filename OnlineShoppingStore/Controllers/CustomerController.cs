@@ -343,5 +343,154 @@ namespace OnlineShoppingStore.Controllers
             }
             return View(order);
         }
+
+        public ActionResult DetailsOfProduct(int productId)
+        {
+            Product product = productService.GetDetails(productId);
+            List<string> Namescategories = new List<string>();
+            foreach (var category in categoryService.GetAll())
+            {
+                Namescategories.Add(category.Name);
+            }
+            ViewBag.NamesCategories = Namescategories;
+
+            ViewBag.Isadded = false;
+
+            if (!String.IsNullOrEmpty(HttpContext.Session.GetString("cart")))
+            {
+                var str = HttpContext.Session.GetString("cart");
+                var productSelected = JsonConvert.DeserializeObject<List<Product>>(str);
+
+                var ProductExist = productSelected.Find(p => p.Id == productId);
+                if (ProductExist != null)
+                {
+                    ViewBag.Isadded = true;
+                    return View("DetailsOfProduct", ProductExist);
+                }
+                else
+                {
+                    ViewBag.Isadded = false;
+                }
+            }
+               
+            return View(product);
+        }
+
+        public ActionResult AddToCartfromdetails(int productId)
+        {
+            Product product = productService.GetDetails(productId);
+            decimal newprice = product.Price;
+            if (String.IsNullOrEmpty(HttpContext.Session.GetString("cart")))
+            {
+                List<Product> productSelected = new List<Product>();
+
+                productSelected.Add(product);
+
+                HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(productSelected, Formatting.None,
+                        new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        }));
+
+                ViewBag.cart = productSelected.Count();
+
+                HttpContext.Session.SetInt32("count", 1);
+
+            }
+            else
+            {
+                var str = HttpContext.Session.GetString("cart");
+                var productSelected = JsonConvert.DeserializeObject<List<Product>>(str);
+
+                var ProductExist = productSelected.Find(p => p.Id == productId);
+                if (ProductExist != null)
+                {
+                    ProductExist.Quantity += 1;
+                    ProductExist.Price += newprice;
+                }
+                else
+                {
+                    productSelected.Add(product);
+                }
+
+                HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(productSelected, Formatting.None,
+                         new JsonSerializerSettings()
+                         {
+                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                         }));
+
+                ViewBag.cart = productSelected.Count();
+                int? count = HttpContext.Session.GetInt32("count");
+                HttpContext.Session.SetInt32("count", (int)(count + 1));
+
+            }
+            return RedirectToAction("DetailsOfProduct", new { productId = productId });
+
+
+        }
+
+        public ActionResult IncreaseproductQuantityfromdetails(int productId)
+        {
+            Product product = productService.GetDetails(productId);
+            decimal Productprice = product.Price;
+            var str = HttpContext.Session.GetString("cart");
+            var productSelected = JsonConvert.DeserializeObject<List<Product>>(str);
+
+            var ProductExist = productSelected.Find(p => p.Id == productId);
+            if (ProductExist != null)
+            {
+                ProductExist.Quantity += 1;
+                ProductExist.Price += Productprice;
+            }
+            else
+            {
+                productSelected.Add(product);
+            }
+
+            HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(productSelected, Formatting.None,
+                     new JsonSerializerSettings()
+                     {
+                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                     }));
+
+            ViewBag.cart = productSelected.Count();
+            int? count = HttpContext.Session.GetInt32("count");
+            HttpContext.Session.SetInt32("count", (int)(count + 1));
+            return RedirectToAction("DetailsOfProduct", new { productId = productId });
+        }
+
+        public ActionResult DecreaseproductQuantityfromdetails(int productId)
+        {
+            Product product = productService.GetDetails(productId);
+            decimal Productprice = product.Price;
+            var str = HttpContext.Session.GetString("cart");
+            var productSelected = JsonConvert.DeserializeObject<List<Product>>(str);
+
+            var ProductExist = productSelected.Find(p => p.Id == productId);
+            if (ProductExist != null)
+            {
+                ProductExist.Quantity -= 1;
+                ProductExist.Price -= Productprice;
+            }
+
+            HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(productSelected, Formatting.None,
+                     new JsonSerializerSettings()
+                     {
+                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                     }));
+
+            ViewBag.cart = productSelected.Count();
+            int? count = HttpContext.Session.GetInt32("count");
+            if (count > 0)
+                HttpContext.Session.SetInt32("count", (int)(count - 1));
+            return RedirectToAction("DetailsOfProduct", new { productId = productId });
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Customer");
+        }
+
     }
 }
