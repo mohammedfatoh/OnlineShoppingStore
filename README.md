@@ -8,8 +8,6 @@
 
 ![Screenshot (2591)](https://user-images.githubusercontent.com/65139875/185252160-5f227342-2c98-49d0-800a-87c7ee28bfe0.png)
 
-
-
 ![Screenshot (2592)](https://user-images.githubusercontent.com/65139875/185252210-39744503-cbc4-4660-9fb9-487e765ac952.png)
 
 ![Screenshot (2593)](https://user-images.githubusercontent.com/65139875/185252241-2ef6d5dc-e8e2-4f83-b71c-03cee1ad3c3c.png)
@@ -35,16 +33,19 @@
 ![Screenshot (2611)](https://user-images.githubusercontent.com/65139875/185252576-488c2955-2028-446e-a43a-c04550f2c589.png)
 
 
+![Screenshot (2609)](https://user-images.githubusercontent.com/65139875/185252859-16fda7f4-47e5-4d7d-9b52-4efd5a9a9fcc.png)
 
+![Screenshot (2610)](https://user-images.githubusercontent.com/65139875/185252877-3b38d582-aa34-4d5c-85a7-bc97eb55f937.png)
+
+![Screenshot (2604)](https://user-images.githubusercontent.com/65139875/185252943-7e25cc7a-f45c-4610-bd4b-ff0d7712c8af.png)
+
+![Screenshot (2605)](https://user-images.githubusercontent.com/65139875/185252991-c1e71fa9-fcca-4d0a-a870-9bd187e0bd59.png)
+
+![Screenshot (2607)](https://user-images.githubusercontent.com/65139875/185253027-6ca247a0-2191-4917-b79b-1f9f1b35c3db.png)
 
 
 
 #Dashboard For admin
-
-
-
-
-
 
 ![Screenshot (2570)](https://user-images.githubusercontent.com/65139875/185231465-b927961f-3127-4a29-a10a-59a3f6377e9b.png)
 
