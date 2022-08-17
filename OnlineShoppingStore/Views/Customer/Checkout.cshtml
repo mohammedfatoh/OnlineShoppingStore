@@ -39,7 +39,7 @@
             <h4>Billing Details</h4>
 
                <form asp-action="Checkout" asp-controller="Customer" asp-antiforgery="true" method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div asp-validation-summary="None" class="text-danger"></div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                        <label asp-for="Email"></label>

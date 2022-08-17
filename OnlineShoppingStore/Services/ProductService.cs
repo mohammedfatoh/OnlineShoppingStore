@@ -35,6 +35,7 @@ namespace OnlineShoppingStore.Services
 
         }
 
+       
         public Product GetDetails(int id)
         {
             return context.Products.FirstOrDefault(s => s.Id == id);

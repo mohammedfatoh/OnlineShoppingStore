@@ -507,7 +507,9 @@ namespace OnlineShoppingStore.Controllers
                 Namescategories.Add(category.Name);
             }
             ViewBag.NamesCategories = Namescategories;
-            return View("productsOfCategory", (productService.GetAll().Where(p => p.Name.Contains(productName)).ToList()));
+           
+            IEnumerable<Product> products = productService.GetAll().Where(p => p.Name.Contains(productName)).ToList();
+            return View(products);
         }
 
         public async Task<IActionResult> Logout()
