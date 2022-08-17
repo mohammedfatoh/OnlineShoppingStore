@@ -1,14 +1,44 @@
 # OnlineShoppingStore
 
-
-
-
-
-
-
-
-
 #Some Photos of Project
+
+#Customer
+
+![Screenshot (2590)](https://user-images.githubusercontent.com/65139875/185252128-f41e9491-a242-4239-8514-e79e732f264c.png)
+
+![Screenshot (2591)](https://user-images.githubusercontent.com/65139875/185252160-5f227342-2c98-49d0-800a-87c7ee28bfe0.png)
+
+
+
+![Screenshot (2592)](https://user-images.githubusercontent.com/65139875/185252210-39744503-cbc4-4660-9fb9-487e765ac952.png)
+
+![Screenshot (2593)](https://user-images.githubusercontent.com/65139875/185252241-2ef6d5dc-e8e2-4f83-b71c-03cee1ad3c3c.png)
+
+![Screenshot (2594)](https://user-images.githubusercontent.com/65139875/185252260-3cbfb70c-ce89-4abe-bf54-53a228c29fcb.png)
+
+![Screenshot (2595)](https://user-images.githubusercontent.com/65139875/185252283-a1c44487-b931-40ad-b19c-85cd80f8941e.png)
+
+![Screenshot (2596)](https://user-images.githubusercontent.com/65139875/185252305-30fe183f-46f1-42f4-b893-16345a9aa916.png)
+
+
+![Screenshot (2597)](https://user-images.githubusercontent.com/65139875/185252357-ab2f9321-aa47-4ccd-9b7f-b642cdc52267.png)
+
+![Screenshot (2598)](https://user-images.githubusercontent.com/65139875/185252385-2542c41d-29d3-4bd3-9ac5-5ea5efd0c9a5.png)
+
+![Screenshot (2599)](https://user-images.githubusercontent.com/65139875/185252416-8a5e4cf5-db67-47f1-bd8f-d849f09a3fbb.png)
+
+![Screenshot (2601)](https://user-images.githubusercontent.com/65139875/185252434-545546f7-0b19-4d37-9abc-914bd0c14f81.png)
+
+![Screenshot (2600)](https://user-images.githubusercontent.com/65139875/185252491-57332e1a-ef50-4b23-9be9-9f3dda583a61.png)
+
+
+![Screenshot (2611)](https://user-images.githubusercontent.com/65139875/185252576-488c2955-2028-446e-a43a-c04550f2c589.png)
+
+
+
+
+
+
 #Dashboard For admin
 
 
@@ -44,7 +74,9 @@
 
 
 
-#Customer
+
+
+
 
 
 
