@@ -5,7 +5,7 @@
 admin who has responsibility To manage this E-commerce website, he Can add categories and add products belongs it, he can delete  any sort and products belong it, see details, and can Update Categories and Products .
 He has the ability to manage customer orders and know their details, as well as users of this site*
 
-ASP.Net Core MVC .Net 6.0, C#, SQL Server, Entity Framework, Microsoft Identity, LINQ, JavaScript, Jquery , HTML , CSS, Bootstrap .
+ASP.Net Core MVC .Net 6.0,Asp.Net Web API, C#, SQL Server, Entity Framework, Microsoft Identity, LINQ, JavaScript, Jquery , HTML , CSS, Bootstrap .
 
 #Some Photos of Project
 
