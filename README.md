@@ -1,5 +1,12 @@
 # OnlineShoppingStore
 
+
+*E-commerce Website. A website that allows people to buy and sell physical goods, services, and digital products over the internet rather than at a brick-and-mortar location. Through an e-commerce website, a business can process orders, accept payments, manage shipping and logistics, and provide customer service
+admin who has responsibility To manage this E-commerce website, he Can add categories and add products belongs it, he can delete  any sort and products belong it, see details, and can Update Categories and Products .
+He has the ability to manage customer orders and know their details, as well as users of this site*
+
+ASP.Net Core MVC .Net 6.0,Asp.Net Web API, C#, SQL Server, Entity Framework, Microsoft Identity, LINQ, JavaScript, Jquery , HTML , CSS, Bootstrap .
+
 #Some Photos of Project
 
 #Customer
