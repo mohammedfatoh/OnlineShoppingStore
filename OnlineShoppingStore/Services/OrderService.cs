@@ -28,6 +28,11 @@ namespace OnlineShoppingStore.Services
             return 1;
         }
 
+        public IEnumerable<Order> Get()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Order> GetAll()
         {
             return context.Orders.ToList();

@@ -25,19 +25,20 @@
     }
     
    }
-   
- <div class="container">
+   @if(@HttpContextAccessor.HttpContext.Session.GetInt32("count") != 0)
+    {
+      <div class="container">
 
-    <h2 class="mt-5"><i class="fa fa-shopping-cart"></i> Shooping Cart</h2>
-    <hr>
+      <h2 class="mt-5"><i class="fa fa-shopping-cart"></i> Shooping Cart</h2>
+       <hr>
 
-    <h4 class="mt-5">@HttpContextAccessor.HttpContext.Session.GetInt32("count") items(s) in Shopping Cart</h4>
+       <h4 class="mt-5">@HttpContextAccessor.HttpContext.Session.GetInt32("count") items(s) in Shopping Cart</h4>
 
-    <div class="cart-items">
+       <div class="cart-items">
         
-        <div class="row">
+          <div class="row">
             
-            <div class="col-md-12">
+             <div class="col-md-12">
                 
                 <table class="table">
                     
@@ -45,7 +46,9 @@
                         
                         @foreach(var product in Model)
                         {
-                            <tr>
+                            @if(product.Quantity > 0)
+                            {
+                                 <tr>
                             <td><img src="data:image/*;base64,@(Convert.ToBase64String(product.Image))" style="width: 5em"></td>
                            <td>
                                 <strong>@product.Name</strong>
@@ -60,14 +63,19 @@
                             
                             <td>
                                 <a  asp-controller="Customer" asp-action="IncreaseproductQuantity" asp-route-productId="@product.Id" class="btn btn-outline-info">+</a>
+                               
                                 <strong>@product.Quantity</strong>
-                                @if(product.Quantity > 1)
-                                {
+                                 @if(product.Quantity > 0)
+                                    {
                                     <a asp-controller="Customer" asp-action="DecreaseproductQuantity" asp-route-productId="@product.Id" class="btn btn-outline-info">-</a>
-                                }
+                                        
+                                    }
+
+                                
                             </td>
                             <td>@product.Price EGP</td>
                         </tr>
+                            }
                         }
                         
                     </tbody>
@@ -155,5 +163,13 @@
             </div>
         </div>
 <!-- /.container -->
+}
+else
+{
+    <h1>CartShoppingEmpty</h1>
+<i class="fa fa-cart-plus "></i>
+ <a  asp-controller="Customer" asp-action="Index" class="btn btn-outline-dark">Staring Shopping</a>
+}
+
 
 

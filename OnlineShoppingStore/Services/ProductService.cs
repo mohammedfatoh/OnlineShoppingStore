@@ -29,6 +29,11 @@ namespace OnlineShoppingStore.Services
             return 1;
         }
 
+        public IEnumerable<Product> Get()
+        {
+            return context.Products;
+        }
+
         public List<Product> GetAll()
         {
             return context.Products.ToList();

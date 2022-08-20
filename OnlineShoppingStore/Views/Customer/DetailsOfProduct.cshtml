@@ -18,10 +18,10 @@
      {
               <a  asp-controller="Customer" asp-action="IncreaseproductQuantityfromdetails" asp-route-productId="@Model.Id" class="btn btn-outline-info">+</a>
                                 <strong>@Model.Quantity</strong>
-                                @if(Model.Quantity > 1)
-                                {
+                                @if(Model.Quantity > 0)
+                                    {
                                     <a asp-controller="Customer" asp-action="DecreaseproductQuantityfromdetails" asp-route-productId="@Model.Id" class="btn btn-outline-info">-</a>
-                                }  
+                                    }
     }
     else
     {

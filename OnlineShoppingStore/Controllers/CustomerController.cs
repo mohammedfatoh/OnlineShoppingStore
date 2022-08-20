@@ -130,7 +130,9 @@ namespace OnlineShoppingStore.Controllers
             var productSeilalized = HttpContext.Session.GetString("cart");
             var productSelected = JsonConvert.DeserializeObject<List<Product>>(productSeilalized);
 
-            productSelected.Remove(productSelected.Find(p => p.Id == productId));
+
+            Product productremove = productSelected.Find(p => p.Id == productId);
+            productSelected.Remove(productremove);
 
 
             HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(productSelected, Formatting.None,
@@ -142,7 +144,7 @@ namespace OnlineShoppingStore.Controllers
             ViewBag.cart = productSelected.Count();
             int? count = HttpContext.Session.GetInt32("count");
             if (count > 0)
-                HttpContext.Session.SetInt32("count", (int)(count - 1));
+                HttpContext.Session.SetInt32("count", (int)(count - productremove.Quantity));
 
 
 
@@ -164,7 +166,7 @@ namespace OnlineShoppingStore.Controllers
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                         }));
                 RemoveProductfromCart(productId);
-                ViewBag.cart = productSelected.Count();
+               // ViewBag.cart = productSelected.Count();
                 HttpContext.Session.SetInt32("countSavedproducts", 1);
 
 
@@ -263,7 +265,7 @@ namespace OnlineShoppingStore.Controllers
             ViewBag.cart = productSelected.Count();
             int? count = HttpContext.Session.GetInt32("count");
             HttpContext.Session.SetInt32("count", (int)(count + 1));
-            return View("Cart", productSelected);
+            return Redirect("Cart");
         }
 
         public ActionResult DecreaseproductQuantity(int productId)
@@ -278,7 +280,14 @@ namespace OnlineShoppingStore.Controllers
             {
                 ProductExist.Quantity -= 1;
                 ProductExist.Price -= Productprice;
+                if (ProductExist.Quantity == 0)
+                {
+                    RemoveProductfromCart(productId);
+                  bool isremove =   productSelected.Remove(ProductExist);
+                }
+
             }
+            
 
             HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(productSelected, Formatting.None,
                      new JsonSerializerSettings()
@@ -290,7 +299,7 @@ namespace OnlineShoppingStore.Controllers
             int? count = HttpContext.Session.GetInt32("count");
             if (count > 0)
                 HttpContext.Session.SetInt32("count", (int)(count - 1));
-            return View("Cart", productSelected);
+            return RedirectToAction("Cart");
         }
 
         public ActionResult Checkout()
@@ -471,6 +480,10 @@ namespace OnlineShoppingStore.Controllers
             {
                 ProductExist.Quantity -= 1;
                 ProductExist.Price -= Productprice;
+                if(ProductExist.Quantity == 0)
+                {
+                    RemoveProductfromCart(productId);
+                }
             }
 
             HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(productSelected, Formatting.None,
@@ -508,7 +521,7 @@ namespace OnlineShoppingStore.Controllers
             }
             ViewBag.NamesCategories = Namescategories;
            
-            IEnumerable<Product> products = productService.GetAll().Where(p => p.Name.Contains(productName)).ToList();
+            List<Product> products = productService.Get().Where(p => p.Name.Contains(productName, StringComparison.OrdinalIgnoreCase)).ToList();
             return View(products);
         }
 
