@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    ViewBag.ViewName = "index";
 }
 
 <div class="container">
@@ -36,7 +37,7 @@
                     </div>
 
                     <div class= "col-1">
-                        <a  asp-controller="Customer" asp-action="AddToCart"  asp-route-productId=@product.Id class="btn btn-primary btn-outline-dark"><i class="fa fa-cart-plus "></i> Add To
+                        <a  asp-controller="Customer" asp-action="AddToCart"  asp-route-productId=@product.Id asp-route-NameView="index" class="btn btn-primary btn-outline-dark"><i class="fa fa-cart-plus "></i> Add To
                         Cart</a>
                     </div>
                 </div>

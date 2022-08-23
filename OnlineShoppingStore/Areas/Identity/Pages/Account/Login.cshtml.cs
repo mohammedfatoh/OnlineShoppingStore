@@ -148,7 +148,10 @@ namespace OnlineShoppingStore.Areas.Identity.Pages.Account
                     else
                     {
                         _logger.LogInformation("User logged in.");
-                        return LocalRedirect(returnUrl);
+                        if (TempData["fromCart"].Equals("fromCart"))
+                            return RedirectToAction("Cart", "Customer");
+                        else
+                           return LocalRedirect(returnUrl);
                     }
                     
                 }

@@ -28,7 +28,7 @@
                     </div>
 
                     <div class= "col-1">
-                        <a  asp-controller="Customer" asp-action="AddToCart"  asp-route-productId=@product.Id class="btn btn-primary btn-outline-dark"><i class="fa fa-cart-plus "></i> Add To
+                        <a  asp-controller="Customer" asp-action="AddToCart"  asp-route-productId=@product.Id asp-route-NameView="category" class="btn btn-primary btn-outline-dark"><i class="fa fa-cart-plus "></i> Add To
                         Cart</a>
                     </div>
                 </div>
